@@ -1,0 +1,61 @@
+@model AspNetCoreSecuritySection3.ViewModels.SearchViewModel
+
+@{
+    ViewData["Title"] = "Search Tickets";
+}
+
+<h2 class="mb-4">Search Support Tickets</h2>
+
+<form asp-action="Index" method="get" class="row g-3 mb-4">
+    <div class="col-md-5">
+        <label class="form-label">Keyword</label>
+        <input type="text" name="query" value="@Model.Query" class="form-control" placeholder="Search title or description..." />
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">Category</label>
+        <select name="category" class="form-select">
+            <option value="">All Categories</option>
+            <option value="Billing" selected="@(Model.Category == "Billing")">Billing</option>
+            <option value="Technical" selected="@(Model.Category == "Technical")">Technical</option>
+            <option value="Account" selected="@(Model.Category == "Account")">Account</option>
+            <option value="Other" selected="@(Model.Category == "Other")">Other</option>
+        </select>
+    </div>
+    <div class="col-md-2 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary w-100">Search</button>
+    </div>
+</form>
+
+@if (Model.Results.Count == 0)
+{
+    <div class="alert alert-info">No tickets found.</div>
+}
+else
+{
+    <p class="text-muted">@Model.Results.Count result(s) found.</p>
+    <table class="table table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Submitted By</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ticket in Model.Results)
+            {
+                <tr>
+                    <td>@ticket.Id</td>
+                    <td>@ticket.Title</td>
+                    <td><span class="badge bg-secondary">@ticket.Category</span></td>
+                    <td>@ticket.FullName</td>
+                    <td>@ticket.CreatedAtUtc.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-link">← Home</a>

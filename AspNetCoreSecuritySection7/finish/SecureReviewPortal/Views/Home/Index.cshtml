@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Secure Review Portal";
+}
+
+<div class="p-4 mb-4 bg-light rounded-3 border">
+    <div class="container-fluid py-2">
+        <h1 class="display-6">Section 7 Capstone: Security Review Portal</h1>
+        <p class="lead mb-0">Internal portal for submitting, reviewing, triaging, and validating security review requests.</p>
+    </div>
+</div>
+
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Review Requests</h5>
+                    <p class="card-text">Create or track security review requests.</p>
+                    <a class="btn btn-primary" asp-controller="SecurityReviewRequests" asp-action="Index">Go to Requests</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Checklist</h5>
+                    <p class="card-text">Use checklist items to guide manual and AI-assisted reviews.</p>
+                    <a class="btn btn-outline-primary" asp-controller="ReviewChecklist" asp-action="Index">Open Checklist</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Reviewer Queue</h5>
+                    <p class="card-text">Reviewers and admins can add and manage findings.</p>
+                    <a class="btn btn-outline-secondary" asp-controller="ReviewFindings" asp-action="Queue">Open Queue</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        Sign in with a seeded account to begin the Section 7 security review walkthrough.
+    </div>
+}

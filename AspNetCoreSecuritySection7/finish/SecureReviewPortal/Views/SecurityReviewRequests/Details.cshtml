@@ -1,0 +1,104 @@
+@model SecurityReviewRequest
+@{
+    ViewData["Title"] = "Review Request Details";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">@Model.Title</h2>
+    <span class="badge bg-secondary">@Model.Status</span>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Request Metadata</h5>
+                <p><strong>System:</strong> @Model.SystemName</p>
+                <p><strong>Classification:</strong> @Model.DataClassification</p>
+                <p><strong>Owner:</strong> @Model.OwnerUser?.Email</p>
+                <p><strong>Created:</strong> @Model.CreatedAtUtc.ToString("u")</p>
+                <p><strong>Submitted:</strong> @(Model.SubmittedAtUtc?.ToString("u") ?? "Not submitted")</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Summary</h5>
+                <p><strong>Description</strong><br />@Model.Description</p>
+                <p class="mb-0"><strong>Business Justification</strong><br />@Model.BusinessJustification</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mb-4">
+    <h4>Attachments</h4>
+    @if (!Model.Attachments.Any())
+    {
+        <p class="text-muted">No attachments uploaded.</p>
+    }
+    else
+    {
+        <ul class="list-group">
+            @foreach (var attachment in Model.Attachments.OrderByDescending(a => a.UploadedAtUtc))
+            {
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>@attachment.OriginalFileName (@attachment.Length bytes)</span>
+                    <span class="text-muted">@attachment.UploadedAtUtc.ToString("u")</span>
+                </li>
+            }
+        </ul>
+    }
+</div>
+
+<div class="mb-4">
+    <h4>Findings</h4>
+    @if (!Model.Findings.Any())
+    {
+        <p class="text-muted">No findings added yet.</p>
+    }
+    else
+    {
+        <table class="table table-sm table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Severity</th>
+                    <th>Status</th>
+                    <th>Source</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var finding in Model.Findings.OrderByDescending(f => f.CreatedAtUtc))
+            {
+                <tr>
+                    <td>@finding.Title</td>
+                    <td>@finding.Severity</td>
+                    <td>@finding.Status</td>
+                    <td>@finding.Source</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</div>
+
+<div class="d-flex gap-2">
+    @if (User.IsInRole("Employee") || User.IsInRole("Admin"))
+    {
+        <a class="btn btn-outline-primary" asp-controller="ReviewAttachments" asp-action="Upload" asp-route-requestId="@Model.Id">Upload Attachment</a>
+    }
+    @if ((User.IsInRole("Employee") || User.IsInRole("Admin")) && Model.Status == SecurityReviewRequestStatus.Draft)
+    {
+        <a class="btn btn-outline-secondary" asp-action="Edit" asp-route-id="@Model.Id">Edit Draft</a>
+        <form asp-action="Submit" asp-route-id="@Model.Id" method="post">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary">Submit for Review</button>
+        </form>
+    }
+    @if (User.IsInRole("Reviewer") || User.IsInRole("Admin"))
+    {
+        <a class="btn btn-success" asp-controller="ReviewFindings" asp-action="Create" asp-route-requestId="@Model.Id">Add Finding</a>
+    }
+</div>

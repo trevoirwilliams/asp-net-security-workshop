@@ -1,0 +1,18 @@
+@AspNetCoreApiSecuritySection4_HostAddress = http://localhost:5170
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTU0YjM0Mi1jZGVkLTQxZDUtYWM5Yi0yYmM4N2FjNjU1ZGQiLCJlbWFpbCI6ImFkbWluQGRlbW8uY29tIiwidW5pcXVlX25hbWUiOiJhZG1pbkBkZW1vLmNvbSIsImp0aSI6ImY4NmQxNmVhLTRhOGEtNDQ3ZS1hYTk1LWY3Mzc3ZjJhNTk4NiIsIlBlcm1pc3Npb24iOiJDYW5BY2Nlc3NBZG1pblBhbmVsIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW5pc3RyYXRvciIsImV4cCI6MTc3NjA0MzQ4MSwiaXNzIjoiQXNwTmV0Q29yZUFwaVNlY3VyaXR5U2VjdGlvbjQiLCJhdWQiOiJBc3BOZXRDb3JlQXBpU2VjdXJpdHlTZWN0aW9uNC5DbGllbnQifQ.1pFtTI9NFfzXavpJ53rB0GDSy5ojnmxhYd688nuf2VM
+GET {{AspNetCoreApiSecuritySection4_HostAddress}}/weatherforecast/
+Accept: application/json
+
+
+### Login as seeded admin
+POST {{AspNetCoreApiSecuritySection4_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "admin@demo.com",
+    "password": "P@ssword1"
+}
+
+### Call protected endpoint with token from login response
+GET {{AspNetCoreApiSecuritySection4_HostAddress}}/WeatherForecast
+Authorization: Bearer {{token}}

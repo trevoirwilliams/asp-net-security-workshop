@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="AspNetCoreApiSecuritySection4/AspNetCoreApiSecuritySection4.csproj" />
+  <Project Path="AspNetCoreSecuritySection4/AspNetCoreSecuritySection4.csproj" />
+</Solution>

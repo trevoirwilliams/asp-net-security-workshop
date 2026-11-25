@@ -1,0 +1,37 @@
+@model IReadOnlyList<SecurityReviewRequest>
+@{
+    ViewData["Title"] = "My Review Requests";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">My Review Requests</h2>
+    <a class="btn btn-primary" asp-action="Create">New Request</a>
+</div>
+
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>System</th>
+            <th>Status</th>
+            <th>Classification</th>
+            <th>Updated</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.SystemName</td>
+            <td>@item.Status</td>
+            <td>@item.DataClassification</td>
+            <td>@item.LastUpdatedAtUtc.ToString("u")</td>
+            <td>
+                <a class="btn btn-sm btn-outline-primary" asp-action="Details" asp-route-id="@item.Id">Details</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

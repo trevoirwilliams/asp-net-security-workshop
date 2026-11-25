@@ -1,0 +1,62 @@
+@page
+@model AspNetCoreSecuritySection5.Pages.Security.IntegrityDemoModel
+@{
+    ViewData["Title"] = "Integrity Demo";
+}
+
+<h1>Integrity Demo</h1>
+
+<p class="text-muted">
+    Submit a payload, sign it with HMAC, then verify the original and a tampered version side-by-side.
+</p>
+
+<form method="post" class="mb-4">
+    <div class="mb-3">
+        <label asp-for="Input.Payload" class="form-label">Payload</label>
+        <textarea asp-for="Input.Payload" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="Input.Payload" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign and Verify</button>
+</form>
+
+@if (Model.HasProcessed)
+{
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Original Payload:</strong></p>
+            <pre class="bg-light p-2 border rounded">@Model.OriginalPayload</pre>
+
+            <p><strong>Computed Signature:</strong></p>
+            <pre class="bg-light p-2 border rounded text-break">@Model.ComputedSignature</pre>
+
+            <p>
+                <strong>Original Verification:</strong>
+                @if (Model.OriginalPayloadVerified)
+                {
+                    <span class="badge bg-success">Pass</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">Fail</span>
+                }
+            </p>
+
+            <hr />
+
+            <p><strong>Tampered Payload:</strong></p>
+            <pre class="bg-light p-2 border rounded">@Model.TamperedPayload</pre>
+
+            <p>
+                <strong>Tampered Verification:</strong>
+                @if (Model.TamperedPayloadVerified)
+                {
+                    <span class="badge bg-danger">Unexpected Pass</span>
+                }
+                else
+                {
+                    <span class="badge bg-success">Expected Fail</span>
+                }
+            </p>
+        </div>
+    </div>
+}

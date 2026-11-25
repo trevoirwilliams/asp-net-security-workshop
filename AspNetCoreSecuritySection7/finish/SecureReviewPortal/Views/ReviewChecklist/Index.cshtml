@@ -1,0 +1,34 @@
+@model IReadOnlyList<SecurityReviewChecklistItem>
+@{
+    ViewData["Title"] = "Security Review Checklist";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Security Review Checklist</h2>
+    @if (User.IsInRole("Admin"))
+    {
+        <a class="btn btn-primary" asp-action="Create">Add Item</a>
+    }
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Order</th>
+            <th>Category</th>
+            <th>Review Question</th>
+            <th>Expected Protection</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.SortOrder</td>
+            <td>@item.Category</td>
+            <td>@item.ReviewQuestion</td>
+            <td>@item.ExpectedProtection</td>
+        </tr>
+    }
+    </tbody>
+</table>

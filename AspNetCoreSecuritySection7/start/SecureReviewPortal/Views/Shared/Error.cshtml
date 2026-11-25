@@ -1,0 +1,28 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Request Failed</h1>
+<h2 class="text-danger">An error occurred while processing your request.</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code><br />
+        <strong>Path:</strong> <code>@Model.Path</code>
+    </p>
+}
+
+@if (!string.IsNullOrWhiteSpace(Model.ExceptionDetails))
+{
+    <div class="alert alert-warning">
+        <strong>Development-style detail is enabled.</strong> This should be disabled prior to release.
+    </div>
+    <div class="card">
+        <div class="card-header">Exception Details</div>
+        <div class="card-body">
+            <pre class="mb-0">@Model.ExceptionDetails</pre>
+        </div>
+    </div>
+}

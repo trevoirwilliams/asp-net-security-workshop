@@ -1,0 +1,38 @@
+﻿@page
+@model AspNetCoreSecuritySection5.Pages.SecureNotes.AccessModel
+@{
+    ViewData["Title"] = "Secure Note Access";
+}
+
+<h1>Secure Note Access</h1>
+
+@if (Model.Note is not null)
+{
+    <div class="alert alert-success">
+        Secure link validated successfully.
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Title:</strong> @Model.Note.Title</p>
+            <p><strong>Recipient Email:</strong> @Model.Note.RecipientEmail</p>
+            <p><strong>Note ID:</strong> @Model.Note.Id</p>
+            <p><strong>Created:</strong> @Model.Note.CreatedUtc:G</p>
+            <hr />
+            <p><strong>Note:</strong></p>
+            <p>@Model.DecryptedNoteBody</p>
+        </div>
+    </div>
+}
+else if (Model.IsExpiredToken)
+{
+    <div class="alert alert-warning">
+        @Model.ErrorMessage
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        @Model.ErrorMessage
+    </div>
+}

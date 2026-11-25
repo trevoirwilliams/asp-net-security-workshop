@@ -1,0 +1,46 @@
+@{
+    ViewData["Title"] = "Admin";
+}
+@model IEnumerable<AspNetCoreSecuritySection6.Models.TaskItem>
+@using AspNetCoreSecuritySection6.Models
+
+<div class="container py-4">
+    <h2>Admin Panel</h2>
+
+    <h4 class="mt-4">All Users</h4>
+    <table class="table table-sm table-bordered">
+        <thead>
+            <tr><th>Email</th><th>Display Name</th><th>Email Confirmed</th></tr>
+        </thead>
+        <tbody>
+            @foreach (ApplicationUser user in ViewBag.Users)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>@user.DisplayName</td>
+                    <td>@user.EmailConfirmed</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4 class="mt-4">All Tasks</h4>
+    <table class="table table-sm table-bordered table-hover">
+        <thead>
+            <tr><th>Id</th><th>Title</th><th>Status</th><th>Owner</th><th>Due</th><th>Completed</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Model)
+            {
+                <tr>
+                    <td>@task.Id</td>
+                    <td><a asp-controller="Tasks" asp-action="Details" asp-route-id="@task.Id">@task.Title</a></td>
+                    <td>@task.Status</td>
+                    <td>@task.Owner?.Email</td>
+                    <td>@task.DueDate?.ToString("yyyy-MM-dd")</td>
+                    <td>@(task.IsCompleted ? "Yes" : "No")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,32 @@
+@model IReadOnlyList<SecurityReviewRequest>
+@{
+    ViewData["Title"] = "Reviewer Queue";
+}
+
+<h2>Reviewer Queue</h2>
+
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th>Request</th>
+            <th>Owner</th>
+            <th>Status</th>
+            <th>Last Updated</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var request in Model)
+    {
+        <tr>
+            <td>@request.Title</td>
+            <td>@request.OwnerUser?.Email</td>
+            <td>@request.Status</td>
+            <td>@request.LastUpdatedAtUtc.ToString("u")</td>
+            <td>
+                <a class="btn btn-sm btn-outline-primary" asp-action="ReviewReady" asp-route-id="@request.Id">Review</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

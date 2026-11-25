@@ -1,0 +1,78 @@
+@page
+@model AspNetCoreSecuritySection5.Pages.Security.ConfigurationCheckModel
+@{
+    ViewData["Title"] = "Configuration Check";
+}
+
+<h1>Configuration Check</h1>
+
+<p class="text-muted">
+    This page verifies configuration wiring only. It never displays secret values.
+</p>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-sm align-middle mb-0">
+            <thead>
+                <tr>
+                    <th scope="col">Check</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Encryption key configured</td>
+                    <td>
+                        @if (Model.EncryptionKeyConfigured)
+                        {
+                            <span class="badge bg-success">Yes</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">No</span>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Webhook signing key configured</td>
+                    <td>
+                        @if (Model.WebhookSigningKeyConfigured)
+                        {
+                            <span class="badge bg-success">Yes</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">No</span>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Key ring path exists</td>
+                    <td>
+                        @if (Model.KeyRingPathExists)
+                        {
+                            <span class="badge bg-success">Yes</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">No</span>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Application name configured</td>
+                    <td>
+                        @if (Model.ApplicationNameConfigured)
+                        {
+                            <span class="badge bg-success">Yes</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">No</span>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

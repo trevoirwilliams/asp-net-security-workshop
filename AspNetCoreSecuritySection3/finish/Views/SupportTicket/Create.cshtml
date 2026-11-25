@@ -1,0 +1,65 @@
+@model AspNetCoreSecuritySection3.ViewModels.SupportTicketInputModel
+
+@{
+    ViewData["Title"] = "Create Support Ticket";
+}
+
+<h2 class="mb-4">Create Support Ticket</h2>
+
+<div class="row">
+    <div class="col-md-7">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+            <div class="mb-3">
+                <label asp-for="FullName" class="form-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" type="email" />
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Category" class="form-label"></label>
+                <select asp-for="Category" class="form-select">
+                    <option value="">— Select a category —</option>
+                    <option>Billing</option>
+                    <option>Technical</option>
+                    <option>Account</option>
+                    <option>Other</option>
+                </select>
+                <span asp-validation-for="Category" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="Description" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Attachment" class="form-label">Attachment (optional)</label>
+                <input asp-for="Attachment" class="form-control" type="file" />
+                <span asp-validation-for="Attachment" class="text-danger small"></span>
+                @* COURSE NOTE: harden file upload in Video 3.5 *@
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit Ticket</button>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-link">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

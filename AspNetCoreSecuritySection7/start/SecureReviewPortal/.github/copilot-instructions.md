@@ -1,0 +1,8 @@
+- Use .NET 10 and C# 14 conventions.
+- Prefer built-in ASP.NET Core security features.
+- Enforce authorization on the server.
+- Do not rely on UI hiding as a security control.
+- Avoid logging secrets or sensitive payloads.
+- Keep code readable for instructional demos.
+- Add comments only when they clarify an instructional security point.
+- When suggesting security fixes, explain the affected file, the risk, and the validation step.

@@ -1,0 +1,24 @@
+@model UploadAttachmentViewModel
+@{
+    ViewData["Title"] = "Upload Attachment";
+}
+
+<h2>Upload Attachment</h2>
+<p class="text-muted">Request: @ViewBag.RequestTitle</p>
+
+<form asp-action="Upload" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <input asp-for="SecurityReviewRequestId" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="File" class="form-label"></label>
+        <input asp-for="File" class="form-control" />
+        <span asp-validation-for="File" class="text-danger"></span>
+        <div class="form-text">Allowed: .pdf, .docx, .txt, .png, .jpg, .jpeg. Maximum 5 MB.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

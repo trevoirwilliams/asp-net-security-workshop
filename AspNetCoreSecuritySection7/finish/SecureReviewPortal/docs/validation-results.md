@@ -1,0 +1,14 @@
+# Validation Results
+
+## Validation Scope
+
+This file records the validation checks performed after remediating Section 7 security review findings.
+
+| Finding ID | Validation Area | Expected Result | Actual Result | Status | Notes |
+|---|---|---|---|---|---|
+| SRP-001 | Reviewer/Admin authorization on reviewer-facing actions | Reviewer workflows (`Queue`, `ReviewReady`, `Create`) should require `Reviewer` or `Admin` access. | `[Authorize(Roles = "Reviewer,Admin")]` is now present on `ReviewFindingsController.Queue`, `ReviewFindingsController.ReviewReady`, and both `ReviewFindingsController.Create` actions. | Pass (Code Validation) | Manual runtime check still recommended with Employee, Reviewer, and Admin accounts to confirm expected 403/200 behavior. |
+| SRP-002 | Upload validation hardening (size, extension, content type, signature) | Uploads should enforce safe filename handling, 5 MB limit, extension allowlist, expected MIME checks, and file signature checks before persistence. | `FileUploadService` now validates filename safety, normalizes extension checks, enforces expected content types, validates signatures for PDF/PNG/JPG/JPEG/DOCX, and applies basic text-file sanity checks for TXT. Upload endpoint also applies request-level multipart size limits. | Pass (Code Validation) | Runtime tests still required for allowed/disallowed, oversized, and mismatched signature/MIME scenarios. |
+| SRP-003 | Log data minimization in submit workflow | Submission logs should avoid full business description/justification content. | Submit log in `SecurityReviewRequestsController.Submit` now records only request ID, owner user ID, classification, and status (no description/justification fields). | Pass (Code Validation) | Validate runtime log output once by submitting a request and reviewing sink output. |
+| SRP-004 | Development secret-management hygiene | No API keys should be committed in development configuration files. | `ExternalReviewService:ApiKey` placeholder was removed from `appsettings.Development.json`. | Pass (Code Validation) | Repository history and CI secret scanning should be checked to ensure no previously committed real secret values exist. |
+| SRP-005 | Production-safe error responses | Production responses should remain generic and should not expose detailed exception content. | `HomeController.Error` now only exposes detailed path/message/stack when development mode and `ExposeExceptionDetails=true`; otherwise it returns a generic message. | Pass (Code Validation) | Run the app in production-like environment and trigger an error to confirm user response and logs are safe. |
+| All Remediations | Build and compile integrity after fixes | Project should compile with no new errors after remediation. | Workspace diagnostics report no build/compile errors after applying fixes. | Pass | Complements, but does not replace, runtime and role-based validation checks. |

@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center mb-4">
+    <h1 class="display-5 fw-bold">Secure Input Handling &amp; Validation</h1>
+    <p class="lead text-muted">Section 3 Demo — ASP.NET Core Security Course</p>
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Submit a Survey</h5>
+                <p class="card-text text-muted">Demonstrates basic form validation with Required, Range, and EmailAddress attributes.</p>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a asp-controller="Survey" asp-action="Create" class="btn btn-primary">Go to Survey</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Create Support Ticket</h5>
+                <p class="card-text text-muted">Shows form validation plus a basic file upload (intentionally simple for now).</p>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a asp-controller="SupportTicket" asp-action="Create" class="btn btn-primary">Open Ticket</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Write a Product Review</h5>
+                <p class="card-text text-muted">Demonstrates StringLength, Range validation on ratings, and business-rule gaps.</p>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a asp-controller="ProductReview" asp-action="Create" class="btn btn-primary">Write Review</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Search Tickets</h5>
+                <p class="card-text text-muted">Safe LINQ-based search across support tickets by title and category.</p>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a asp-controller="Search" asp-action="Index" class="btn btn-primary">Search</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Test API Endpoint</h5>
+                <p class="card-text text-muted">
+                    POST <code>/api/surveys</code> — send JSON with valid or invalid data to explore model validation responses.
+                </p>
+                <small class="text-muted">Use a tool like curl, Postman, or the browser DevTools console.</small>
+            </div>
+            <div class="card-footer bg-transparent">
+                <span class="badge bg-secondary">POST /api/surveys</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+{
+  "Id": "b03d7120-1c61-42a7-b010-a7cf65cd7561",
+  "Title": "Testing",
+  "RecipientEmail": "testagent3@crm.com",
+  "CiphertextBase64": "5K6v0SsCE85/ILtDxSshfZtX",
+  "NonceBase64": "MyDSEoihYhDYhHqn",
+  "TagBase64": "6PG7STVRiEoNn0Uo2CbqjQ==",
+  "CreatedUtc": "2026-04-16T21:38:30.2708858Z",
+  "CreatedByUserId": "c0a955d5-db34-4ed6-b5de-b5111c4f7d1d"
+}

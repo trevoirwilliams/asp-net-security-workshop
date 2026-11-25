@@ -1,0 +1,2 @@
+# This directory stores uploaded support ticket attachments.
+# COURSE NOTE: harden file upload in Video 3.5 — move storage outside wwwroot.

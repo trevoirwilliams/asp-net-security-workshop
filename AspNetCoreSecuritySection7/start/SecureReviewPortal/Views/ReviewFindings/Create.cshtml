@@ -1,0 +1,52 @@
+@model ReviewFindingViewModel
+@{
+    ViewData["Title"] = "Add Finding";
+}
+
+<h2>Add Finding</h2>
+<p class="text-muted">Request: @ViewBag.RequestTitle</p>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <input asp-for="SecurityReviewRequestId" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <label asp-for="Severity" class="form-label"></label>
+            <select asp-for="Severity" asp-items="Html.GetEnumSelectList<FindingSeverity>()" class="form-select"></select>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Source" class="form-label"></label>
+            <select asp-for="Source" asp-items="Html.GetEnumSelectList<FindingSource>()" class="form-select"></select>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Status" class="form-label"></label>
+            <select asp-for="Status" asp-items="Html.GetEnumSelectList<FindingStatus>()" class="form-select"></select>
+        </div>
+    </div>
+    <div class="mt-3 mb-3">
+        <label asp-for="Evidence" class="form-label"></label>
+        <textarea asp-for="Evidence" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Evidence" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="RecommendedAction" class="form-label"></label>
+        <textarea asp-for="RecommendedAction" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="RecommendedAction" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Finding</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

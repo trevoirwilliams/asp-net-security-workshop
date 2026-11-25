@@ -1,0 +1,35 @@
+@model IReadOnlyList<SecurityReviewRequest>
+@{
+    ViewData["Title"] = "Submitted Requests";
+}
+
+<h2>Submitted Requests</h2>
+<p class="text-muted">Reviewer and admin view.</p>
+
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Owner</th>
+            <th>Status</th>
+            <th>Classification</th>
+            <th>Updated</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.OwnerUser?.Email</td>
+            <td>@item.Status</td>
+            <td>@item.DataClassification</td>
+            <td>@item.LastUpdatedAtUtc.ToString("u")</td>
+            <td>
+                <a class="btn btn-sm btn-outline-primary" asp-action="Details" asp-route-id="@item.Id">Details</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,51 @@
+@{
+    ViewData["Title"] = "Welcome";
+}
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">AspNetCoreSecuritySection6</h1>
+        <p class="lead text-muted">A lightweight task management app built for team collaboration.</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Tasks</h5>
+                    <p class="card-text">Create, track, and complete tasks. Share progress with your team.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Collaborate</h5>
+                    <p class="card-text">Add comments and attach files to tasks to keep everyone in the loop.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Stay Notified</h5>
+                    <p class="card-text">Webhook integrations notify external systems when tasks are completed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (!User.Identity!.IsAuthenticated)
+    {
+        <div class="text-center mt-5">
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary me-2">Get Started</a>
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-secondary">Sign In</a>
+        </div>
+    }
+    else
+    {
+        <div class="text-center mt-5">
+            <a asp-controller="Dashboard" asp-action="Index" class="btn btn-primary">Go to Dashboard</a>
+        </div>
+    }
+</div>

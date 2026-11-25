@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+@model IEnumerable<AspNetCoreSecuritySection6.Models.TaskItem>
+
+<div class="container py-4">
+    <h2>Dashboard</h2>
+    <p class="text-muted">Welcome back, @User.Identity!.Name</p>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card text-bg-primary">
+                <div class="card-body">
+                    <h5 class="card-title">My Tasks</h5>
+                    <p class="display-6">@ViewBag.TotalTasks</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-bg-success">
+                <div class="card-body">
+                    <h5 class="card-title">Completed</h5>
+                    <p class="display-6">@ViewBag.CompletedTasks</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4>Recent Tasks</h4>
+    @if (!Model.Any())
+    {
+        <p class="text-muted">No tasks yet. <a asp-controller="Tasks" asp-action="Create">Create one</a>.</p>
+    }
+    else
+    {
+        <ul class="list-group mb-3">
+            @foreach (var task in Model)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a asp-controller="Tasks" asp-action="Details" asp-route-id="@task.Id">@task.Title</a>
+                    <span class="badge @(task.IsCompleted ? "bg-success" : "bg-secondary")">@task.Status</span>
+                </li>
+            }
+        </ul>
+    }
+
+    <a asp-controller="Tasks" asp-action="Index" class="btn btn-outline-primary me-2">All Tasks</a>
+    <a asp-controller="Tasks" asp-action="Create" class="btn btn-primary">New Task</a>
+</div>
