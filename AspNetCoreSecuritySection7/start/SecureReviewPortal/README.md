@@ -12,8 +12,8 @@ This project is structured for end-to-end secure application review activities:
 - Validating fixes and preparing release recommendations
 
 ## Prerequisites
-- .NET SDK 10.0+
-- EF Core CLI tools (dotnet-ef)
+- .NET 11 SDK
+- EF Core CLI tools (optional for manual database updates)
 
 ## How To Run The App
 ```powershell
@@ -23,7 +23,6 @@ dotnet run
 
 ## How To Apply Migrations
 ```powershell
-dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
@@ -80,17 +79,9 @@ Do not place real secrets in appsettings files. For real deployments use:
 5. 7.6 Validate fixes and release readiness:
    - Use docs/release-readiness-summary-template.md and verification checks.
 
-## Expected Setup Flow (Course Script)
-```powershell
-dotnet new mvc -n SecureReviewPortal --framework net10.0
-cd SecureReviewPortal
-dotnet add package Microsoft.EntityFrameworkCore.Sqlite
-dotnet add package Microsoft.EntityFrameworkCore.Design
-dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
-dotnet ef migrations add InitialCreate
-dotnet ef database update
-dotnet run
-```
+## Workshop setup
+
+Use the checked-in project and follow the [workshop setup guide](../../../README.md).
 
 ## Important Warning
 This application is for instructional security review demonstrations and should not be deployed as-is.

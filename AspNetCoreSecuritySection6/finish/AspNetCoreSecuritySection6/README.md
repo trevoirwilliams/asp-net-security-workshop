@@ -33,7 +33,7 @@ A baseline ASP.NET Core MVC task management application built for a security tra
 
 ## How to Run
 
-**Prerequisites:** .NET 10 SDK
+**Prerequisites:** .NET 11 SDK
 
 ```bash
 cd AspNetCoreSecuritySection6

@@ -20,4 +20,4 @@ For each finding:
 - Avoid speculative findings without evidence from the code.
 - Do not introduce new features unless they are required to fix a security weakness.
 
-Focus on ASP.NET Core and .NET 10 security practices.
+Focus on ASP.NET Core and .NET 11 security practices.
